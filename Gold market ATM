@@ -1,0 +1,119 @@
+# Account balances
+checking_balance = 11000
+savings_balance = 5000
+crypto_balance = 0
+
+# Crypto prices
+bitcoin_price = 26883
+ethereum_price = 1786
+
+# PIN 
+correct_pin = 1234
+
+# Greeting
+print("Welcome to Gold Market ATM")
+
+# PIN entry
+pin = input("Please enter your 4-digit PIN: ")
+while len(pin) != 4 or not pin.isdigit() or int(pin) != correct_pin:
+    print("Invalid PIN. Please enter a 4-digit number.")
+    pin = input("Please enter your 4-digit PIN: ")
+print("PIN accepted.")
+
+
+# Menu loop
+while True:
+    # Print menu options
+    print("\nPlease select an option:")
+    print("1. Checking")
+    print("2. Savings")
+    print("3. Crypto Exchange")
+    print("4. Exit")
+    
+    # Get user input
+    choice = input("> ")
+    
+    # Handle user choice
+    if choice == "1":
+        # Checking menu
+        print("\nChecking Menu")
+        print("1. Deposit")
+        print("2. Withdraw")
+        print("3. Check balance")
+        sub_choice = input("> ")
+        if sub_choice == "1":
+            amount = float(input("Enter amount to deposit: "))
+            checking_balance += amount
+            print(f"Deposit successful. New checking balance: {checking_balance}")
+        elif sub_choice == "2":
+            amount = float(input("Enter amount to withdraw: "))
+            if amount > checking_balance:
+                print("Insufficient funds.")
+            else:
+                checking_balance -= amount
+                print(f"Withdrawal successful. New checking balance: {checking_balance}")
+        elif sub_choice == "3":
+            print(f"Checking balance: {checking_balance}")
+        else:
+            print("Invalid choice.")
+    
+    elif choice == "2":
+        # Savings menu
+        print("\nSavings Menu")
+        print("1. Deposit")
+        print("2. Withdraw")
+        print("3. Check balance")
+        sub_choice = input("> ")
+        if sub_choice == "1":
+            amount = float(input("Enter amount to deposit: "))
+            savings_balance += amount
+            print(f"Deposit successful. New savings balance: {savings_balance}")
+        elif sub_choice == "2":
+            amount = float(input("Enter amount to withdraw: "))
+            if amount > savings_balance:
+                print("Insufficient funds.")
+            else:
+                savings_balance -= amount
+                print(f"Withdrawal successful. New savings balance: {savings_balance}")
+        elif sub_choice == "3":
+            print(f"Savings balance: {savings_balance}")
+        else:
+            print("Invalid choice.")
+    
+    elif choice == "3":
+        # Crypto exchange menu
+        print("\nCrypto Exchange Menu")
+        print("1. Buy Bitcoin")
+        print("2. Buy Ethereum")
+        print("3. Check balance")
+        sub_choice = input("> ")
+        if sub_choice == "1":
+            amount = float(input("Enter amount to spend: "))
+            if amount > checking_balance:
+                print("Insufficient funds.")
+            else:
+                bitcoin = amount / bitcoin_price
+                crypto_balance += bitcoin
+                checking_balance -= amount
+                print(f"Purchase successful. New Bitcoin balance: {crypto_balance}")
+        elif sub_choice == "2":
+            amount = float(input("Enter amount to spend: "))
+            if amount > checking_balance:
+                print("Insufficient funds.")
+            else:
+                ethereum = amount / ethereum_price
+                crypto_balance += ethereum
+                checking_balance -= amount
+                print(f"Purchase successful. New Ethereum balance: {crypto_balance}")
+        elif sub_choice == "3":
+                        print(f"Crypto balance: {crypto_balance}")
+        else:
+            print("Invalid choice.")
+    
+    elif choice == "4":
+        # Exit prompt
+        print("\nThank You for Using Gold Market ATM. Goodbye!")
+        break
+    
+    else:
+        print("Invalid choice.")
